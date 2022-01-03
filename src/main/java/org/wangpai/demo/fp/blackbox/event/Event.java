@@ -1,19 +1,29 @@
 package org.wangpai.demo.fp.blackbox.event;
 
+import java.util.HashMap;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
+/**
+ * @since 2021-12-31
+ */
 public class Event {
-    /**
-     * value 为具体的数据，key 为为 value 而起的名字
-     *
-     * @since 2021-11-24
-     */
-    private Map<String, Object> data;
+    private Map<DataType, Object> data;
 
-    public Event(Map<String, Object> data) {
+    private Event() {
         super();
-        this.data = data;
+        this.data = new HashMap<>(2);
+    }
+
+    public Object getData(DataType dataType) {
+        return data.get(dataType);
+    }
+
+    public Event setData(DataType dataType, Object data) {
+        this.data.put(dataType, data);
+        return this;
+    }
+
+    public static Event getInstance() {
+        return new Event();
     }
 }
